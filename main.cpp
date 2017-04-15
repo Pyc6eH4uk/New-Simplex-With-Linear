@@ -58,9 +58,9 @@ struct Formater {
 void compute_value(int j) {
     value = 1;
     for (int i = 0; i < n + m; i++) {
-        value += (-1) * v[i] * x[i] - z[i];
+        value += (-1) * v[i] * x[i];
     }
-//    value -= z[j];
+    value -= z[j];
     formater.print("Value: \n", false);
     formater.print(value);
     formater.print("\n\n");
@@ -262,8 +262,8 @@ bool evaluate_table() {
     evaluate_dual_variables();
     for (int i = 0; i < m; i++) {
         linear_cut(L[i]);
-        compute_value(i);
         transformation_linear_cut(L[i]);
+        compute_value(i);
     }
     evaluate_z();
     find_best();
